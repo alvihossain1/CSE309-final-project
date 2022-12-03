@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +45,7 @@
         <!-- Navbar Starts Here -->
         <nav class="custom-nav navbar navbar-dark navbar-expand-lg bgnav-p">
             <div class="container-fluid">
-                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.html">
+                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.php">
                     <div class="d-flex align-items-center justify-content-center gap-3">
                         <img src="./image/theatreLogo.png" alt="Theatre_Logo" style="height: 3rem; width:auto;">
                         <p class="m-0 p-0">Studio <span class="logo-span">Artisan</span></p>
@@ -57,10 +60,10 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-effect nav-p-link-color nav-link" aria-current="page"
-                                href="./index.html">Home</a>
+                                href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.html">About Us</a>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button"
@@ -68,8 +71,8 @@
                                 More
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                <li><a class="dropdown-item" href="./signup.html">Sign Up</a></li>
+                                <li><a class="dropdown-item" href="./login.php">Login</a></li>
+                                <li><a class="dropdown-item" href="./signup.php">Sign Up</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -78,7 +81,7 @@
                         </li>
                     </ul>
                     <div class="profile-nav d-flex">
-                        <a class="nav-effect nav-p-link-color nav-link" href="./login.html">Profile / Login</a>
+                        <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
                     </div>
                 </div>
             </div>
@@ -153,7 +156,7 @@
                             <button class="form-button m-0">Add Shows</button>>
                         </div>
                         <div class="admin-button m-0 p-0 w-50">
-                            <a href="./datalisting.html" class="form-button m-0 text-center">Data Listing</a>
+                            <a href="./datalisting.php" class="form-button m-0 text-center">Data Listing</a>
                         </div>
                     </div>
                     <!-- Buttons Stack Ends -->
@@ -260,10 +263,10 @@
                     <div class="col-md-4">
                         <div class="footer-width-link mx-auto d-flex flex-column py-4">
                             <ul class="d-flex flex-column p-0">
-                                <li><a class="myfooter-links" href="./index.html">Home</a></li>
-                                <li> <a class="myfooter-links" href="./aboutUs.html">About Us</a></li>
-                                <li><a class="myfooter-links" href="./signup.html">Sign Up</a></li>
-                                <li> <a class="myfooter-links" href="./login.html">Login</a></li>
+                                <li><a class="myfooter-links" href="./index.php">Home</a></li>
+                                <li> <a class="myfooter-links" href="./aboutUs.php">About Us</a></li>
+                                <li><a class="myfooter-links" href="./signup.php">Sign Up</a></li>
+                                <li> <a class="myfooter-links" href="./login.php">Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -308,7 +311,7 @@
                 </div>
                 <div class="bg-footer-bottom text-center p-3">
                     © 2022 Copyright:
-                    <a class="myfooter-links" href="./index.html">Studio Artisan</a>
+                    <a class="myfooter-links" href="./index.php">Studio Artisan</a>
                 </div>
             </div>
         </footer>

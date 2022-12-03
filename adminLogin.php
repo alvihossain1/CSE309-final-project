@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/external.css">
     <link rel="stylesheet" type="text/css" href="./css/form.css">
+    <link rel="stylesheet" type="text/css" href="./css/admin.css">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,12 +38,12 @@
 </head>
 
 <body>
-    <div class="main position-relative vh-100 background-form">
+    <div class="main position-relative vh-100 admin-background">
 
         <!-- Navbar Starts Here SPECIAL -->
         <nav class="custom-nav navbar navbar-dark navbar-expand-lg bgnav-p position-absolute start-0 top-0 end-0">
             <div class="container-fluid">
-                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.html">
+                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.php">
                     <div class="d-flex align-items-center justify-content-center gap-3">
                         <img src="./image/theatreLogo.png" alt="Theatre_Logo" style="height: 3rem; width:auto;">
                         <p class="m-0 p-0">Studio <span class="logo-span">Artisan</span></p>
@@ -53,10 +57,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link" aria-current="page" href="./index.html">Home</a>
+                            <a class="nav-effect nav-p-link-color nav-link" aria-current="page" href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.html">About Us</a>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button"
@@ -64,8 +68,8 @@
                                 More
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                <li><a class="dropdown-item" href="./signup.html">Sign Up</a></li>
+                                <li><a class="dropdown-item" href="./login.php">Login</a></li>
+                                <li><a class="dropdown-item" href="./signup.php">Sign Up</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -87,8 +91,8 @@
         <div class="d-flex justify-content-center align-items-center h-100">
             <form class="form-container special" method="POST" action="">
                 <div class="form-box flex-column">
-                    <div class="form-block full-width" style="text-align: center;">
-                        <h2>Login</h2>
+                    <div class="form-block full-width" style="text-align: center; color: rgba(212, 166, 14, 0.753);">
+                        <h2>Admin Login</h2>
                     </div>                    
                     <div class="form-block full-width">
                         <label class="text-label">Email</label>

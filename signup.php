@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,13 +37,59 @@
 
 </head>
 
+<?php
+
+    $link = mysqli_connect("localhost", "root", "", "theatre_db");
+
+    if($link === false){
+        die("ERROR: Could not connect" . mysqli_connect_error());
+    }
+
+    $text = "";
+
+    if (isset($_POST['submit-button'])) {
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $address = $_POST['address'];
+        $city = $_POST['city'];
+        $zip = $_POST['zip'];
+        $gender = $_POST['gender'];
+        $email = $_POST['email'];
+        $pass = $_POST['pass'];        
+
+        $sql = "INSERT INTO user_t(fname, lname, addr, city, zip, gender, email, pass) VALUES ('$fname', '$lname', '$address', '$city', '$zip' , '$gender', '$email', '$pass');";
+
+        if(mysqli_query($link, $sql)){
+            $text = "Records Added Successfully";
+        }
+        else{
+            $text = "Error";
+        }   
+
+        
+        mysqli_close($link);
+
+    }
+
+if (isset($_POST['logout-submit'])) {
+        
+    $_SESSION["loggedInUser"] = "";
+
+}
+
+ 
+  
+
+
+?>
+
 <body>
     <div class="main position-relative min-vh-100 background-form">
 
         <!-- Navbar Starts Here SPECIAL -->
         <nav class="custom-nav navbar navbar-dark navbar-expand-lg bgnav-p position-absolute start-0 top-0 end-0">
             <div class="container-fluid">
-                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.html">
+                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.php">
                     <div class="d-flex align-items-center justify-content-center gap-3">
                         <img src="./image/theatreLogo.png" alt="Theatre_Logo" style="height: 3rem; width:auto;">
                         <p class="m-0 p-0">Studio <span class="logo-span">Artisan</span></p>
@@ -53,10 +103,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link" aria-current="page" href="./index.html">Home</a>
+                            <a class="nav-effect nav-p-link-color nav-link" aria-current="page" href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.html">About Us</a>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button"
@@ -64,17 +114,24 @@
                                 More
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                <li><a class="dropdown-item" href="./signup.html">Sign Up</a></li>
+                                <li><a class="dropdown-item" href="./login.php">Login</a></li>
+                                <li><a class="dropdown-item" href="./signup.php">Sign Up</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <form action="POST" method="">
+                                    <li><button class="dropdown-item" name="logout-submit">Logout</button></li>
+                                </form>
                             </ul>
                         </li>
                     </ul>
                     <div class="profile-nav d-flex">
-                        <a class="nav-effect nav-p-link-color nav-link" href="./login.html">Profile / Login</a>
+                        <?php if ($_SESSION['loggedInUser'] === "") { ?>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
+                        <?php }else{ ?>
+                            <p class="nav-effect nav-p-link-color nav-link m-0" style="cursor: pointer;"><?php echo $_SESSION['loggedInUser']?></p>
+                        <?php } ?>                        
                     </div>
                 </div>
             </div>
@@ -125,6 +182,22 @@
                             </div>
                         </div>
                         <!--  -->
+                        <div class="px-1">
+                            <div class="form-block full-width px-1">
+                                <label class="text-label">Gender</label>
+                                <div class="gender-box">
+                                    <div>
+                                        <label class="gender-label" for="gMale">Male</label>
+                                        <input class="gender-input" type="radio" name="gender" value="male" id="gMale" required>
+                                    </div>
+                                    <div>
+                                        <label class="gender-label" for="gFemale">Female</label>
+                                        <input class="gender-input" type="radio" name="gender" value="female" id="gFemale" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <!--  -->
                         <div class="col-md-6 px-1">
                             <div class="form-block full-width px-1">
                                 <label class="text-label">Email</label>
@@ -134,18 +207,18 @@
                         <div class="col-md-6 px-1">
                             <div class="form-block full-width px-1">
                                 <label class="text-label">Password</label>
-                                <input class="text-input" type="password" name="password" required>
+                                <input class="text-input" type="password" name="pass" required>
                             </div>
                         </div>
                         <!-- display message below -->
-                        <div class="col-12 px-1 d-none">
-                            <div class="form-block full-width px-1">
-                                <p class="p-0 m-0"></p>
+                        <div style="display: <?php if($text === ""){echo "none;";}else{echo "flex;";} ?>">
+                            <div class="form-block full-width">
+                                <p> <?php echo $text ?> </p>
                             </div>
                         </div>
                         <div class="col-12 px-1">
                             <div class="form-block full-width px-1">
-                                <button class="form-button" type="submit" name="submit">Sign Up</button>
+                                <button class="form-button" type="submit" name="submit-button">Sign Up</button>
                             </div>
                         </div>
                     </div>

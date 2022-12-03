@@ -1,6 +1,6 @@
 let maxNoTicket = 6
 
-//######
+// ######
 const urlParams = new URLSearchParams(location.search);
 for (const [key, value] of urlParams) {
     console.log(`${key}:${value}`);

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +52,7 @@
         <!-- Navbar Starts Here -->
         <nav class="custom-nav navbar navbar-dark navbar-expand-lg bgnav-p">
             <div class="container-fluid">
-                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.html">
+                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.php">
                     <div class="d-flex align-items-center justify-content-center gap-3">
                         <img src="./image/theatreLogo.png" alt="Theatre_Logo" style="height: 3rem; width:auto;">
                         <p class="m-0 p-0">Studio <span class="logo-span">Artisan</span></p>
@@ -62,13 +66,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link myactive" aria-current="page" href="./index.html">Home</a>
+                            <a class="nav-effect nav-p-link-color nav-link myactive" aria-current="page" href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-effect show-nav nav-p-link-color nav-link" href="#wholeShow">Shows</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.html">About Us</a>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
                         </li>                        
                         <li class="nav-item dropdown">
                             <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button"
@@ -76,18 +80,24 @@
                                 More
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./login.html">Login</a></li>
-                                <li><a class="dropdown-item" href="./signup.html">Sign Up</a></li>
+                                <li><a class="dropdown-item" href="./login.php">Login</a></li>
+                                <li><a class="dropdown-item" href="./signup.php">Sign Up</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item" href="#">Setting</a></li>
                             </ul>
                         </li>
-                    </ul>                                            
+                    </ul>
+
                     <div class="profile-nav d-flex">
-                        <a class="nav-effect nav-p-link-color nav-link" href="./login.html">Profile / Login</a>
-                    </div>                    
+                        <?php if ($_SESSION['loggedInUser'] === "") { ?>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
+                        <?php }else{ ?>
+                            <p class="nav-effect nav-p-link-color nav-link m-0" style="cursor: pointer;"><?php echo $_SESSION['loggedInUser']?></p>
+                        <?php } ?>                        
+                    </div>   
+
                 </div>
             </div>
         </nav>
@@ -157,12 +167,6 @@
             </div>
         </div>
         <!-- Slider Ends -->
-
-
-
-
-
-
 
 
 
@@ -468,40 +472,49 @@
 
 
 
-
-
-
-
-
         <!-- Modal Starts Here-->
-        <div class="modal position-fixed vh-100 start-0 end-0 top-0 bottom-0 justify-content-center align-items-center" style="z-index: 2;">
-            <div class="modal-box mytransition position-relative overflow-auto scrollbar-none">
-                <div class="row m-0 bg-p-1 modal-border modal-shadow">
-                    <div class="col-lg-6 m-0 p-0">
-                        <div class="modal-image-holder">
-                            <img class="modal-image" src="https://www.subplotstudio.com/resources/images/productions/193/7974/art.overview.437.jpg">
-                        </div>                        
-                    </div>
-                    <div class="col-lg-6 m-0 p-0">
-                        <div class="modal-texts d-flex flex-column align-items-center py-4 w-100">
-                            <h1 class="modal-show-heading mb-5">AIDA</h1>
-                            <p>Ticket Price: 650</p>
-                            <p>Show Time: 12:00 - 1:00 PM</p>
-                            <p>Show Duration: 1hr</p>
-                            <p>Seats Available: 25</p>
-                            <p>Hall Name: xxx</p>
-                            <p>Hall Number: 3</p>
+        <form method="POST" action="">
+            <div class="modal position-fixed vh-100 start-0 end-0 top-0 bottom-0 justify-content-center align-items-center" style="z-index: 2;">
+                <div class="modal-box mytransition position-relative overflow-auto scrollbar-none">
+                    <div class="row m-0 bg-p-1 modal-border modal-shadow">
+                        <div class="col-lg-6 m-0 p-0">
+                            <div class="modal-image-holder">
+                                <img class="modal-image" src="https://www.subplotstudio.com/resources/images/productions/193/7974/art.overview.437.jpg">
+                            </div>                        
+                        </div>
+                        <div class="col-lg-6 m-0 p-0">
+                            <div class="modal-texts d-flex flex-column align-items-center py-4 w-100">
+                                <h1 class="modal-show-heading mb-5"></h1>
+                                <p>Ticket Price: 650</p>
+                                <p>Show Time: 12:00 - 1:00 PM</p>
+                                <p>Show Duration: 1hr</p>
+                                <p>Seats Available: 25</p>
+                                <p>Hall Name: xxx</p>
+                                <p>Hall Number: 3</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex position-sticky end-0 bottom-0 start-0 w-100">
-                    <button id="modalClosebtn" class="mybutton w-100 py-2">Close</button>
-                    <button id="goToPaymentBtn" class="mybutton w-100 py-2">Purchase Tickets</button>
+                    <div class="d-flex position-sticky end-0 bottom-0 start-0 w-100">
+                        <a id="modalClosebtn" class="mybutton w-100 py-2" style="cursor: pointer; text-align: center;">Close</a>
+                        <button type="submit" name="submit" id="goToPaymentBtn" class="mybutton w-100 py-2">Purchase Tickets</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>        
         <!-- Modal ends -->
 
+
+        <?php
+            echo "PHP HELLO!";
+            
+            if(isset($_POST['submit'])){
+
+                // echo $showNamePost = "<script> document.writeln(document.querySelector('.modal-show-heading').innerHTML) </script>";
+                echo $_POST["showName"];
+            }
+
+            
+        ?>
 
 
 
@@ -515,10 +528,10 @@
                     <div class="col-md-4">
                         <div class="footer-width-link mx-auto d-flex flex-column py-4">
                             <ul class="d-flex flex-column p-0">
-                                <li><a class="myfooter-links" href="./index.html">Home</a></li>
-                                <li> <a class="myfooter-links" href="./aboutUs.html">About Us</a></li>   
-                                <li><a class="myfooter-links" href="./signup.html">Sign Up</a></li>    
-                                <li> <a class="myfooter-links" href="./login.html">Login</a></li>   
+                                <li><a class="myfooter-links" href="./index.php">Home</a></li>
+                                <li> <a class="myfooter-links" href="./aboutUs.php">About Us</a></li>   
+                                <li><a class="myfooter-links" href="./signup.php">Sign Up</a></li>    
+                                <li> <a class="myfooter-links" href="./login.php">Login</a></li>   
                             </ul>
                         </div>
                     </div>
@@ -568,7 +581,7 @@
                 </div>
                 <div class="bg-footer-bottom text-center p-3">
                     © 2022 Copyright:
-                    <a class="myfooter-links" href="./index.html">Studio Artisan</a>
+                    <a class="myfooter-links" href="./index.php">Studio Artisan</a>
                 </div>
             </div>
         </footer>

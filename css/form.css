@@ -43,7 +43,6 @@ a{
 .gender-box{
     display: flex;
     gap: 0.3rem;
-    flex-direction: column;
 }
 
 .gender-label{
