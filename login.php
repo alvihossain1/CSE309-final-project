@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start();  
 ?>
 
 <!DOCTYPE html>
@@ -41,13 +41,13 @@
 <?php 
     
 
-    $link = mysqli_connect("localhost", "root", "", "theatre_db");
+    $conn = mysqli_connect("localhost", "root", "", "theatre_db");
 
-    if ($link === false) {
+    if ($conn === false) {
         die("ERROR: Could not connect" . mysqli_connect_error());
     }
 
-    $textMsg = "";
+    $text = "";
 
     if(isset($_POST['submit'])){
 
@@ -55,25 +55,35 @@
         $passInput = $_POST['password'];
 
         $sql = "SELECT email, pass, fname, lname FROM user_t WHERE email = '$emailInput' and pass = '$passInput'";
-        $result = mysqli_query($link, $sql);
-        $num = mysqli_num_rows($result);
-        $textMsg = $num;
+        $result = mysqli_query($conn, $sql);
 
-        $found = false;
-
-        while($row = mysqli_fetch_assoc($result)){
-            if($row['email'] === $emailInput || $row['pass'] === $passInput){
-                $_SESSION["loggedInUser"] = $row['fname']." ".$row['lname'];
+        foreach($result as $user){
+            if($user['email'] === $emailInput && $user['pass'] === $passInput){
+                $_SESSION["loggedInUser"] = $user['fname']." ".$user['lname'];
+                $_SESSION["userEmail"] = $user['email'];
                 header('Location: index.php');
-            }  
+            } 
+        }
+        if(mysqli_num_rows($result) === 0){
+            $text = "Email or Pass doesn't match";
+            $textColor = "text-danger";
         }
 
-        if(!$found){
-            $textMsg = "Email or Pass is not found";
-        }
     }
 
-    mysqli_close($link);
+    mysqli_close($conn);
+
+    
+?>
+
+<?php 
+
+if(isset($_POST['logout-submit'])){
+    if(isset($_SESSION['loggedInUser']) || isset($_SESSION['userEmail'])){
+        unset($_SESSION['loggedInUser']);
+        unset($_SESSION['userEmail']);
+    }
+}
 
 ?>
 
@@ -120,13 +130,25 @@
                             </ul>
                         </li>
                     </ul>
+                    <!-- SPECIAL NAV -->
                     <div class="profile-nav d-flex">
-                        <?php if ($_SESSION['loggedInUser'] === "") { ?>
+                        <?php if (!isset($_SESSION['loggedInUser'])) { ?>
                             <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
-                        <?php }else{ ?>
-                            <p class="nav-effect nav-p-link-color nav-link m-0" style="cursor: pointer;"><?php echo $_SESSION['loggedInUser']?></p>
-                        <?php } ?>                        
+                        <?php } else { ?>                            
+                            <div class="dropdown d-flex align-items-center">
+                                <a class="nav-effect nav-p-link-color m-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo $_SESSION['loggedInUser'] ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
+                                    <li><form class="text-align-center" method="POST" action="">
+                                        <button class="dropdown-item" name="logout-submit">Logout</button>
+                                    </form></li>
+                                </ul>
+                            </div>
+                        <?php } ?>
                     </div>
+                    <!-- SPECIAL NAV END  -->
                 </div>
             </div>
         </nav>
@@ -153,6 +175,13 @@
                     <div class="form-block full-width d-none">
                         <p class="p-0 m-0"></p>
                     </div>
+                    
+                    <!-- Display MS -->
+                    <div style="display: <?php if($text === ""){echo "none;";}else{echo "flex;";} ?>">
+                            <div class="form-block full-width <?php echo $textColor; ?>">
+                                <p> <?php echo $text ?> </p>
+                            </div>
+                        </div>
     
                     <div class="form-block full-width">
                         <button class="form-button" type="submit" name="submit">Login</button>

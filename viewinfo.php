@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,12 +11,11 @@
     <title>Studio Artisan</title>
 
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- My CSS -->
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="stylesheet" type="text/css" href="./css/external.css">    
+    <link rel="stylesheet" type="text/css" href="./css/external.css">
     <link rel="stylesheet" type="text/css" href="./css/form.css">
 
     <!-- Google Fonts Start -->
@@ -26,9 +25,7 @@
     <!-- Google Fonts End -->
 
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     </script>
 
     <!-- Font Awesome -->
@@ -37,15 +34,48 @@
 </head>
 
 
-<?php 
+<?php
 
+$conn = mysqli_connect("localhost", "root", "", "theatre_db");
+
+if ($conn === false) {
+    die("ERROR: Could not connect" . mysqli_connect_error());
+}
+
+if (isset($_SESSION['loggedInUser'])) {
+    $userName = $_SESSION['loggedInUser'];
+    $userEmail = $_SESSION['userEmail'];
+
+    
+
+    $sql = "SELECT * FROM user_t WHERE email = '$userEmail'";
+    $result = mysqli_query($conn, $sql);
+
+    foreach($result as $user){
+        $fname = $user['fname'];
+        $lname = $user['lname'];
+        $addr = $user['addr'];
+        $city = $user['city'];
+        $zip = $user['zip'];
+        $email = $user['email'];
+        $pass = $user['pass'];
+    }
+
+    
+}
+
+mysqli_close($conn);
+
+
+?>
+
+<?php 
 if(isset($_POST['logout-submit'])){
     if(isset($_SESSION['loggedInUser']) || isset($_SESSION['userEmail'])){
         unset($_SESSION['loggedInUser']);
         unset($_SESSION['userEmail']);
     }
 }
-
 ?>
 
 
@@ -61,9 +91,7 @@ if(isset($_POST['logout-submit'])){
                         <p class="m-0 p-0">Studio <span class="logo-span">Artisan</span></p>
                     </div>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -75,8 +103,7 @@ if(isset($_POST['logout-submit'])){
                             <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 More
                             </a>
                             <ul class="dropdown-menu">
@@ -93,16 +120,18 @@ if(isset($_POST['logout-submit'])){
                     <div class="profile-nav d-flex">
                         <?php if (!isset($_SESSION['loggedInUser'])) { ?>
                             <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
-                        <?php } else { ?>                            
+                        <?php } else { ?>
                             <div class="dropdown d-flex align-items-center">
                                 <a class="nav-effect nav-p-link-color m-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php echo $_SESSION['loggedInUser'] ?>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
-                                    <li><form class="text-align-center" method="POST" action="">
-                                        <button class="dropdown-item" name="logout-submit">Logout</button>
-                                    </form></li>
+                                    <li>
+                                        <form class="text-align-center" method="POST" action="./index.php">
+                                            <button class="dropdown-item" name="logout-submit">Logout</button>
+                                        </form>
+                                    </li>
                                 </ul>
                             </div>
                         <?php } ?>
@@ -116,48 +145,51 @@ if(isset($_POST['logout-submit'])){
         <div class="bg-p-5 min-vh-100">
             <div class="section">
                 <div class="small-section">
-                    <div class="row text-white">                       
-                        <div class="col-md-6 p-0">
-                            <div class="d-flex flex-column align-items-center justify-content-center bg-p-2 p-3 h-100">
-                                <h1 class="">Get Tickets</h1>
-                                <div class="w-50 d-flex flex-column gap-3">
-                                    <div class="same text-center">
-                                        <p>Show Name: <span style="color: goldenrod;" id="ticketShowname"></span></p>
-                                        <p>Show Time: </p>
-                                    </div>
-                                    <div class="same">
-                                        <p>Select No. of Tickets</p>
-                                        <div class="d-flex w-100 bg-dark">
-                                            <button id="minus-button" class="mybutton w-100 button-p-sidebar-bg py-2">-</button>
-                                            <div class="w-100 d-flex align-items-center justify-content-center">
-                                                <p id="mid-value" class="m-0">1</p>
-                                            </div>
-                                            <button id="plus-button" class="mybutton w-100 button-p-sidebar-bg">+</button>
-                                        </div>
-                                    </div>
-                                    <div class="same">
-                                        <p>Select Payment Option</p>
-                                        <select class="w-100 p-2 bg-p-1 text-white" style="cursor: pointer;">
-                                            <option>Bank</option>
-                                            <option>Bkash</option>
-                                            <option>Nagad</option>
-                                        </select>
-                                    </div>
-                                    <div class="same mt-3">
-                                        <button id="confirm-tickets" class="mybutton w-100 button-p-sidebar-bg p-2">Confirm Tickets</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="col-md-6 p-0">
-                            <div class="overflow-hidden p-1 image-hover position-relative">
-                                <div class="position-absolute start-0 end-0 bottom-0 top-0" style="background-color: rgba(255, 255, 255, 0.1); z-index: 1;"></div>
-                                <img class="small-image grid-image" src="https://c8.alamy.com/comp/2BG784X/retro-party-cinema-invitation-vector-tickets-set-vector-golden-tickets-isolated-on-black-background-illustration-2BG784X.jpg"  style="height: 60vh;">
-                            </div>
-                        </div>                                                                     
+                    <div class="overflow-hidden text-white">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>                                    
+                                    <th scope="col">Information</th>
+                                    <th scope="col">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>                                    
+                                    <td>First Name</td>                                    
+                                    <td><?php echo $fname; ?></td>                                    
+                                </tr>
+                                <tr>                                    
+                                    <td>Last Name</td>                                    
+                                    <td><?php echo $lname; ?></td>                                    
+                                </tr>
+                                <tr>                                    
+                                    <td>Address</td>                                    
+                                    <td><?php echo $addr; ?></td>                                    
+                                </tr>
+                                <tr>                                    
+                                    <td>City</td>                                    
+                                    <td><?php echo $city; ?></td>                                    
+                                </tr>
+                                <tr>                                    
+                                    <td>Zip</td>                                    
+                                    <td><?php echo $zip; ?></td>                                    
+                                </tr>
+                                <tr>                                    
+                                    <td>Email</td>                                    
+                                    <td><?php echo $email; ?></td>                                    
+                                </tr>
+                                <tr>                                    
+                                    <td>Password</td>                                    
+                                    <td><?php echo $pass; ?></td>                                    
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-    
+
+
             </div>
         </div>
 
@@ -167,15 +199,15 @@ if(isset($_POST['logout-submit'])){
 
         <!-- FOOTER Starts Here -->
         <footer class="bg-footer text-center text-white">
-            <div class="w-100 p-0 m-0">            
+            <div class="w-100 p-0 m-0">
                 <div class="row m-0 p-0 py-2">
                     <div class="col-md-4">
                         <div class="footer-width-link mx-auto d-flex flex-column py-4">
                             <ul class="d-flex flex-column p-0">
                                 <li><a class="myfooter-links" href="./index.php">Home</a></li>
-                                <li> <a class="myfooter-links" href="./aboutUs.php">About Us</a></li>   
-                                <li><a class="myfooter-links" href="./signup.php">Sign Up</a></li>    
-                                <li> <a class="myfooter-links" href="./login.php">Login</a></li>   
+                                <li> <a class="myfooter-links" href="./aboutUs.php">About Us</a></li>
+                                <li><a class="myfooter-links" href="./signup.php">Sign Up</a></li>
+                                <li> <a class="myfooter-links" href="./login.php">Login</a></li>
                             </ul>
                         </div>
                     </div>
@@ -189,37 +221,25 @@ if(isset($_POST['logout-submit'])){
                         <div class="d-flex justify-content-center align-items-center h-100 py-4">
                             <div class="links-here">
                                 <!-- Facebook -->
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                                ><i class="fab fa-facebook-f"></i
-                                ></a>
-                            
+                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
                                 <!-- Twitter -->
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                                    ><i class="fab fa-twitter"></i
-                                ></a>
-                            
+                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
                                 <!-- Google -->
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                                    ><i class="fab fa-google"></i
-                                ></a>
-                            
+                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+
                                 <!-- Instagram -->
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                                    ><i class="fab fa-instagram"></i
-                                ></a>
-                            
+                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
                                 <!-- Linkedin -->
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                                    ><i class="fab fa-linkedin-in"></i
-                                ></a>
-                            
+                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
                                 <!-- Github -->
-                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
-                                    ><i class="fab fa-github"></i
-                                ></a>
+                                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- Section: Social media -->
                 </div>
@@ -228,7 +248,7 @@ if(isset($_POST['logout-submit'])){
                     <a class="myfooter-links" href="./index.php">Studio Artisan</a>
                 </div>
             </div>
-        </footer> 
+        </footer>
         <!-- FOOTER Ends -->
 
 
@@ -243,8 +263,7 @@ if(isset($_POST['logout-submit'])){
 <script src="./js/ticket.js" type="text/javascript"></script>
 
 <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+</script>
 
 </html>

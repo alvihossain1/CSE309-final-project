@@ -39,9 +39,9 @@
 
 <?php
 
-    $link = mysqli_connect("localhost", "root", "", "theatre_db");
+    $conn = mysqli_connect("localhost", "root", "", "theatre_db");
 
-    if($link === false){
+    if($conn === false){
         die("ERROR: Could not connect" . mysqli_connect_error());
     }
 
@@ -58,28 +58,42 @@
         $pass = $_POST['pass'];        
 
         $sql = "INSERT INTO user_t(fname, lname, addr, city, zip, gender, email, pass) VALUES ('$fname', '$lname', '$address', '$city', '$zip' , '$gender', '$email', '$pass');";
-
-        if(mysqli_query($link, $sql)){
-            $text = "Records Added Successfully";
+        
+        try {
+            require_once "signup.php";
+            if(mysqli_query($conn, $sql)){
+                $text = "Registration Done Successfully";
+                $textColor = "text-success";
+            }
+        }catch (Exception $e){
+            if($conn -> errno === 1062){
+                $text = "This email is already taken";
+                $textColor = "text-warning";
+            }
+            else{
+                $text = $e->getMessage();
+                $textColor = "text-warning";
+            }
         }
-        else{
-            $text = "Error";
-        }   
 
         
-        mysqli_close($link);
+        mysqli_close($conn);
 
     }
+    
+    
 
-if (isset($_POST['logout-submit'])) {
-        
-    $_SESSION["loggedInUser"] = "";
 
+?>
+
+<?php 
+
+if(isset($_POST['logout-submit'])){
+    if(isset($_SESSION['loggedInUser']) || isset($_SESSION['userEmail'])){
+        unset($_SESSION['loggedInUser']);
+        unset($_SESSION['userEmail']);
+    }
 }
-
- 
-  
-
 
 ?>
 
@@ -119,20 +133,29 @@ if (isset($_POST['logout-submit'])) {
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Setting</a></li>
-                                <form action="POST" method="">
-                                    <li><button class="dropdown-item" name="logout-submit">Logout</button></li>
-                                </form>
+                                <li><a class="dropdown-item" href="#">Setting</a></li>                                
                             </ul>
                         </li>
                     </ul>
+                    <!-- SPECIAL NAV -->
                     <div class="profile-nav d-flex">
-                        <?php if ($_SESSION['loggedInUser'] === "") { ?>
+                        <?php if (!isset($_SESSION['loggedInUser'])) { ?>
                             <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
-                        <?php }else{ ?>
-                            <p class="nav-effect nav-p-link-color nav-link m-0" style="cursor: pointer;"><?php echo $_SESSION['loggedInUser']?></p>
-                        <?php } ?>                        
+                        <?php } else { ?>                            
+                            <div class="dropdown d-flex align-items-center">
+                                <a class="nav-effect nav-p-link-color m-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo $_SESSION['loggedInUser'] ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
+                                    <li><form class="text-align-center" method="POST" action="">
+                                        <button class="dropdown-item" name="logout-submit">Logout</button>
+                                    </form></li>
+                                </ul>
+                            </div>
+                        <?php } ?>
                     </div>
+                    <!-- SPECIAL NAV END  -->
                 </div>
             </div>
         </nav>
@@ -182,21 +205,27 @@ if (isset($_POST['logout-submit'])) {
                             </div>
                         </div>
                         <!--  -->
-                        <div class="px-1">
+                        <div class="col-12 px-1">
                             <div class="form-block full-width px-1">
                                 <label class="text-label">Gender</label>
-                                <div class="gender-box">
-                                    <div>
+                                <div class="gender-box gap-3">
+                                    <div class="d-flex gap-2">
                                         <label class="gender-label" for="gMale">Male</label>
                                         <input class="gender-input" type="radio" name="gender" value="male" id="gMale" required>
                                     </div>
-                                    <div>
+                                    <div class="d-flex gap-2">
                                         <label class="gender-label" for="gFemale">Female</label>
                                         <input class="gender-input" type="radio" name="gender" value="female" id="gFemale" required>
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
+                        <!-- <div class="col-md-6 px-1">
+                            <div class="form-block full-width px-1">
+                                <label class="text-label">Upload Image</label>
+                                <input class="form-control bg-dark text-white" type="file" name="image-file" required>
+                            </div>
+                        </div>                         -->
                         <!--  -->
                         <div class="col-md-6 px-1">
                             <div class="form-block full-width px-1">
@@ -212,7 +241,7 @@ if (isset($_POST['logout-submit'])) {
                         </div>
                         <!-- display message below -->
                         <div style="display: <?php if($text === ""){echo "none;";}else{echo "flex;";} ?>">
-                            <div class="form-block full-width">
+                            <div class="form-block full-width <?php echo $textColor; ?>">
                                 <p> <?php echo $text ?> </p>
                             </div>
                         </div>

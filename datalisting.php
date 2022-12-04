@@ -39,6 +39,17 @@
 
 </head>
 
+<?php 
+
+if(isset($_POST['logout-submit'])){
+    if(isset($_SESSION['loggedInUser']) || isset($_SESSION['userEmail'])){
+        unset($_SESSION['loggedInUser']);
+        unset($_SESSION['userEmail']);
+    }
+}
+
+?>
+
 <body>
     <div class="main bg-p-1 position-relative">
 
@@ -80,9 +91,25 @@
                             </ul>
                         </li>
                     </ul>
+                    <!-- SPECIAL NAV -->
                     <div class="profile-nav d-flex">
-                        <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
+                        <?php if (!isset($_SESSION['loggedInUser'])) { ?>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
+                        <?php } else { ?>                            
+                            <div class="dropdown d-flex align-items-center">
+                                <a class="nav-effect nav-p-link-color m-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo $_SESSION['loggedInUser'] ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
+                                    <li><form class="text-align-center" method="POST" action="">
+                                        <button class="dropdown-item" name="logout-submit">Logout</button>
+                                    </form></li>
+                                </ul>
+                            </div>
+                        <?php } ?>
                     </div>
+                    <!-- SPECIAL NAV END  -->
                 </div>
             </div>
         </nav>
