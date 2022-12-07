@@ -24,6 +24,10 @@ a{
     text-decoration: none;
 }
 
+small{
+    font-size: 0.6rem;
+}
+
 ul li{
     list-style-type: none;
 }

@@ -1,0 +1,35 @@
+REGISTER:
+CREATE TABLE user_t(
+    fname VARCHAR(50),
+    lname VARCHAR(50),
+    addr VARCHAR(100),
+    city VARCHAR(20),
+	zip VARCHAR(20),
+    gender VARCHAR(10),
+    email VARCHAR(100),
+    pass VARCHAR(100),
+    CONSTRAINT user_PK PRIMARY KEY (email)
+);
+
+-------------------------------------------------
+
+LOGIN:
+SELECT email, pass, fname, lname FROM user_t WHERE email = '$emailInput' and pass = '$passInput';
+
+-------------------------------------------------
+
+SHOW::
+CREATE TABLE shows_t(
+    showID BIGINT,
+    showName VARCHAR(50),
+    showGenre VARCHAR(50),
+    showDateTime VARCHAR(30),    
+    showImageLink VARCHAR(300),
+    showDescription VARCHAR(600),
+    showVenue VARCHAR(50),
+    showVenueDetails VARCHAR(50),
+    showTicketPrice INT,
+    hallName VARCHAR(100),
+    CONSTRAINT show_pk PRIMARY KEY (showID)
+);
+------------------------------------------
