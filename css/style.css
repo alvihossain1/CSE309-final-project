@@ -84,7 +84,7 @@ ul li{
 }
 
 .gradient{
-    background-color: rgba(39, 39, 39, 0.171);
+    background: linear-gradient(to right, rgba(26, 26, 26, 0.35), rgba(70, 60, 60, 0.2), rgba(26, 26, 26, 0.35));
     z-index: 1;
 }
 

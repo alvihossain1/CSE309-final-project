@@ -129,10 +129,15 @@
     color: black;
 }
 
-.form-container .text-input{
+.text-input{
     border: 2px solid #d19644b0;
     color: white;
 }
+
+.text-input:focus{
+    border: 2px solid rgb(121, 12, 30);
+}
+
 .text-section{
     background-color: rgba(218, 165, 32, 0.514);
     background-color: #284951;
