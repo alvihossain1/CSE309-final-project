@@ -15,7 +15,7 @@
                 </video>
                 <div class="gradient position-absolute start-0 top-0 end-0 bottom-0"></div>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Cinematic Shows</h5>
+                    <p>Cinematic Shows</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error dolorum dolores explicabo id aut quibusdam?</p>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 </video>
                 <div class="gradient position-absolute start-0 top-0 end-0 bottom-0"></div>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Cinematic Shows</h5>
+                    <p>Cinematic Shows</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error dolorum dolores explicabo id aut quibusdam?</p>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 </video>
                 <div class="gradient position-absolute start-0 top-0 end-0 bottom-0"></div>
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Cinematic Shows</h5>
+                    <p>Cinematic Shows</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error dolorum dolores explicabo id aut quibusdam?</p>
                 </div>
             </div>

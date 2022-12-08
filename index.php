@@ -15,8 +15,8 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php"?>">
-    <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php"?>">
+    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php" ?>">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,37 +34,98 @@ session_start();
 
 <?php include "./components/module/sessionHolder.php" ?>
 
-<?php 
-    
+<?php
 
-    $conn = mysqli_connect("localhost", "root", "", "theatre_db");
 
-    if ($conn === false) {
-        die("ERROR: Could not connect" . mysqli_connect_error());
-    }
+$conn = mysqli_connect("localhost", "root", "", "theatre_db");
 
-    $text = "";
+if ($conn === false) {
+    die("ERROR: Could not connect" . mysqli_connect_error());
+}
 
-    
+$text = "";
 
-    
 
-        $sql = "SELECT * FROM shows_t";
-        $result = mysqli_query($conn, $sql);
 
-  
 
-    mysqli_close($conn);
 
-    
+$sql = "SELECT * FROM shows_t";
+$result = mysqli_query($conn, $sql);
+
+
+
+mysqli_close($conn);
+
+
 ?>
 
 <body>
     <div class="main position-relative">
 
-        <!-- Navbar Starts Here -->
-        <?php include "./components/interface/navbar.php" ?>
-        <!-- Navbar Ends Here -->
+        <!-- Navbar SPECIAL Starts Here -->
+        <nav class="custom-nav navbar navbar-dark navbar-expand-lg bg-transparent position-fixed top-0 end-0 start-0 nav-home" style="z-index: 2;">
+            <div class="container-fluid">
+                <a class="navbar-brand nav-effect nav-p-link-color" href="./index.php">
+                    <div class="d-flex align-items-center justify-content-center gap-3">
+                        <img src="./image/theatreLogo.png" alt="Theatre_Logo" style="height: 3rem; width:auto;">
+                        <p class="m-0 p-0">Studio <span class="logo-span">Artisan</span></p>
+                    </div>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-effect nav-p-link-color nav-link myactive" aria-current="page" href="./index.php">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-effect show-nav nav-p-link-color nav-link" href="#wholeShow">Shows</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-effect nav-p-link-color nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                More
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./login.php">Login</a></li>
+                                <li><a class="dropdown-item" href="./signup.php">Sign Up</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Setting</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <!-- SPECIAL NAV -->
+                    <div class="profile-nav d-flex">
+                        <?php if (!isset($_SESSION['loggedInUser'])) { ?>
+                            <a class="nav-effect nav-p-link-color nav-link" href="./login.php">Profile / Login</a>
+                        <?php } else { ?>
+                            <div class="dropdown d-flex align-items-center">
+                                <a class="nav-effect nav-p-link-color m-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo $_SESSION['loggedInUser'] ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
+                                    <li>
+                                        <form class="text-align-center" method="POST" action="">
+                                            <button class="dropdown-item" name="logout-submit">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <!-- SPECIAL NAV END  -->
+
+                </div>
+            </div>
+        </nav>
+        <!-- Navbar Ends -->
 
 
 
@@ -88,7 +149,7 @@ session_start();
                         <?php foreach ($result as $show) { ?>
                             <div class="show-item show-p-item-bg mybg-dark">
                                 <div class="image-holder">
-                                    <img class="image" src="<?php echo $show['showUrl']?>" alt="poster_image">
+                                    <img class="image" src="<?php echo $show['showUrl'] ?>" alt="poster_image">
                                 </div>
                                 <div class="text-holder">
                                     <p class="text-center mb-0"><?php echo $show['showName'] ?></p>
@@ -146,7 +207,7 @@ session_start();
                     </div>
                     <div class="col-lg-6 m-0 p-0">
                         <div class="modal-texts d-flex flex-column align-items-center py-4 w-100">
-                            <h1 class="modal-show-heading mb-5"><span id="m-showName" ></span></h1>
+                            <h1 class="modal-show-heading mb-5"><span id="m-showName"></span></h1>
                             <p>Genre: <span id="m-showGenre"></span></p>
                             <p>Ticket Price: <span id="m-showTicketPrice"></span></p>
                             <p>Show Date: <span id="m-showDate"></span> </p>
@@ -157,8 +218,10 @@ session_start();
                             <div class="hidden-box d-none">
                                 <p id="m-showUrl"></p>
                                 <p id="m-showID"></p>
-                                <p id="m-showDescription"></p>                                
-                                <p id="m-userEmail"><?php if(isset($_SESSION['userEmail'])){echo $_SESSION['userEmail'];}; ?></p>                                
+                                <p id="m-showDescription"></p>
+                                <p id="m-userEmail"><?php if (isset($_SESSION['userEmail'])) {
+                                                        echo $_SESSION['userEmail'];
+                                                    }; ?></p>
                             </div>
                         </div>
                     </div>
@@ -166,9 +229,9 @@ session_start();
                 <div class="d-flex position-sticky end-0 bottom-0 start-0 w-100">
                     <button id="modalClosebtn" class="mybutton w-100 py-2">Close</button>
                     <?php if (isset($_SESSION['loggedInUser'])) { ?>
-                        <button name="purchase-ticket-button" id="goToPaymentBtn" class="mybutton w-100 py-2 modal-go-btn">Purchase Tickets</button> 
-                    <?php }else { ?>
-                        <a href="./login.php" class="mybutton w-100 py-2 modal-go-btn text-white text-center">Login To Purchase</a>
+                        <button name="purchase-ticket-button" id="goToPaymentBtn" class="mybutton w-100 py-2 modal-go-btn">Purchase Tickets</button>
+                    <?php } else { ?>
+                        <a href="./login.php" id="goToPaymentBtn" class="mybutton w-100 py-2 modal-go-btn text-white text-center">Login To Purchase</a>
                     <?php } ?>
                 </div>
             </div>
@@ -190,8 +253,9 @@ session_start();
     <!-- Main DIV Ends -->
 </body>
 
-<script src="./js/index.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
-<script src="./js/modal.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
+<script src="./js/scroll.js?v=<?php include "./zconfig.php" ?>" type="text/javascript"></script>
+<script src="./js/index.js?v=<?php include "./zconfig.php" ?>" type="text/javascript"></script>
+<script src="./js/modal.js?v=<?php include "./zconfig.php" ?>" type="text/javascript"></script>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
