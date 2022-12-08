@@ -19,6 +19,11 @@ $(document).ready(function () {
             $("#showDate-alert").text("*This is a required field")
             emptyCheck = true
         }
+        if ($("#showTime").val() === "") {
+            $("#showTime-alert").css("display", "block")
+            $("#showTime-alert").text("*This is a required field")
+            emptyCheck = true
+        }
         if ($("#showUrl").val() === "") {
             $("#showUrl-alert").css("display", "block")
             $("#showUrl-alert").text("*This is a required field")
@@ -62,10 +67,11 @@ $(document).ready(function () {
             }
 
             // AJAX.....
-            let objectShow = {
+            let object = {
                 showName: $("#showName").val(),
                 showGenre: $("#showGenre").val(),
-                showDateTime: $("#showDate").val(),
+                showDate: $("#showDate").val(),
+                showTime: $("#showTime").val(),
                 showUrl: $("#showUrl").val(),
                 showDescription: $("#showDesc").val(),
                 showVenue: $("#showVenue").val(),
@@ -73,13 +79,13 @@ $(document).ready(function () {
                 showTicketPrice: $("#showPrice").val(),
                 hallName: $("#hallName").val()
             }
-            console.log(objectShow)
+            console.log(object)
 
             // AJAX Work
             $.ajax({
                 type: "POST",
                 url: "controller/php/adminShowForm.php",
-                data: objectShow,
+                data: object,
                 success: function (dataResult) {
                     let result = JSON.parse(dataResult)
                     console.log(result)

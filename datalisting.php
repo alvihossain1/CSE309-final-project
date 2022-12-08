@@ -209,7 +209,7 @@
     </div>
 </body>
 
-<script src="./js/admin.js" type="text/javascript"></script>
+<script src="./js/admin.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

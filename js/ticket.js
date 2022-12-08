@@ -1,4 +1,8 @@
 let maxNoTicket = 6
+let number
+let totalAmount
+
+
 
 // ######
 const urlParams = new URLSearchParams(location.search);
@@ -23,7 +27,8 @@ document.getElementById("minus-button").addEventListener("click", () => {
         document.getElementById("minus-button").disabled = false
         intVal--
         midText.innerHTML = intVal.toString()        
-        document.getElementById("plus-button").disabled = false        
+        document.getElementById("plus-button").disabled = false 
+        $("#ticket-totalAmount").text(parseInt(intVal)*parseInt($("#ticket-showTicketPrice").text()))       
     }
 })
 
@@ -39,10 +44,43 @@ document.getElementById("plus-button").addEventListener("click", () => {
         document.getElementById("plus-button").disabled = false
         intVal++
         midText.innerHTML = intVal.toString()
-        document.getElementById("minus-button").disabled = false        
+        document.getElementById("minus-button").disabled = false
+        $("#ticket-totalAmount").text(parseInt(intVal)*parseInt($("#ticket-showTicketPrice").text()))        
     }
 })
 
+$( document ).ready(function() {
+    console.log( sessionStorage.getItem("showObject") )
+    data = JSON.parse(sessionStorage.getItem("showObject"))
+
+    
+    $("#ticket-showName").text(data.showName)
+    $("#ticket-showDate").text(data.showDate)
+    $("#ticket-showTime").text(data.showTime)
+    $("#ticket-showTicketPrice").text(data.showTicketPrice)
+    $("#ticket-totalAmount").text($("#ticket-showTicketPrice").text()) 
+
+    let totalAmount = parseInt($("#ticket-totalAmount").text())
+    let venueSelection = $("#ticket-paymentMethod").val()
+    let paymentMethod = $("#ticket-venueSelection").val()
+
+    let data2 = {totalAmount, venueSelection, paymentMethod}
+
+
+    sessionStorage.setItem("showSelection", JSON.stringify(data2))
+
+    // $.ajax({
+    //     type: "POST",
+    //     url: "controller/php/fetchUserShow.php",
+    //     data: data,
+    //     success: function (dataResult) {
+    //         let result = JSON.parse(dataResult)
+    //         console.log(result)
+    //     }
+    // })
+});
+
+
 document.getElementById("confirm-tickets").addEventListener("click", () => {
-    location.href = "index.html"
+    ticketConfirm()
 })

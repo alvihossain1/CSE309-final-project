@@ -102,11 +102,19 @@ session_start();
                                         <div class="col-md-6 px-1">
                                             <div class="form-block full-width px-1">
                                                 <label for="showDate" class="text-label">Show Date</label>
-                                                <input id="showDate" class="text-input bg-p-2" type="datetime-local" name="showDate" required>
+                                                <input id="showDate" class="text-input bg-p-2" type="date" name="showDate" required>
                                                 <p id="showDate-alert" class="alert-text text-success" style="display: none;"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-6 px-1">
+                                            <div class="form-block full-width px-1">
+                                                <label for="showTime" class="text-label">Show Time</label>
+                                                <input id="showTime" class="text-input bg-p-2" type="time" name="showTime" required>
+                                                <p id="showTime-alert" class="alert-text text-success" style="display: none;"></p>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-12 px-1">
                                             <div class="form-block full-width px-1">
                                                 <label for="showUrl" class="text-label">Show Image Link</label>
                                                 <input id="showUrl" class="text-input" type="url" name="showUrl" required>
@@ -207,7 +215,7 @@ session_start();
 </script>
 
 <!-- CONTROLLER -->
-<script src="./controller/js/adminShowForm.js"></script>
+<script src="./controller/js/adminShowForm.js?v=<?php include "./zconfig.php"?>"></script>
 
 
 <!-- JavaScript Bundle with Popper -->

@@ -15,8 +15,8 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="stylesheet" type="text/css" href="./css/external.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php"?>">
+    <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php"?>">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -96,7 +96,8 @@ session_start();
                                         <p class="h-showID text-center mb-0"><?php echo $show['showID'] ?></p>
                                         <p class="h-showName text-center mb-0"><?php echo $show['showName'] ?></p>
                                         <p class="h-showGenre text-center mb-0"><?php echo $show['showGenre'] ?></p>
-                                        <p class="h-showDateTime text-center mb-0"><?php echo $show['showDateTime'] ?></p>
+                                        <p class="h-showDate text-center mb-0"><?php echo $show['showDate'] ?></p>
+                                        <p class="h-showTime text-center mb-0"><?php echo $show['showTime'] ?></p>
                                         <p class="h-showUrl text-center mb-0"><?php echo $show['showUrl'] ?></p>
                                         <p class="h-showDescription text-center mb-0"><?php echo $show['showDescription'] ?></p>
                                         <p class="h-showVenue text-center mb-0"><?php echo $show['showVenue'] ?></p>
@@ -148,7 +149,8 @@ session_start();
                             <h1 class="modal-show-heading mb-5"><span id="m-showName" ></span></h1>
                             <p>Genre: <span id="m-showGenre"></span></p>
                             <p>Ticket Price: <span id="m-showTicketPrice"></span></p>
-                            <p>Show Date and Time: <span id="m-showDateTime"></span> </p>
+                            <p>Show Date: <span id="m-showDate"></span> </p>
+                            <p>Show Time: <span id="m-showTime"></span> </p>
                             <p>Hall Name: <span id="m-hallName"></span> </p>
                             <p>Venue: <span id="m-showVenue"></span></p>
                             <p>Venue Details: <span id="m-showVenueDetails"></span></p>
@@ -156,13 +158,18 @@ session_start();
                                 <p id="m-showUrl"></p>
                                 <p id="m-showID"></p>
                                 <p id="m-showDescription"></p>                                
+                                <p id="m-userEmail"><?php if(isset($_SESSION['userEmail'])){echo $_SESSION['userEmail'];}; ?></p>                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex position-sticky end-0 bottom-0 start-0 w-100">
                     <button id="modalClosebtn" class="mybutton w-100 py-2">Close</button>
-                    <button id="goToPaymentBtn" class="mybutton w-100 py-2">Purchase Tickets</button>
+                    <?php if (isset($_SESSION['loggedInUser'])) { ?>
+                        <button name="purchase-ticket-button" id="goToPaymentBtn" class="mybutton w-100 py-2 modal-go-btn">Purchase Tickets</button> 
+                    <?php }else { ?>
+                        <a href="./login.php" class="mybutton w-100 py-2 modal-go-btn text-white text-center">Login To Purchase</a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -183,8 +190,8 @@ session_start();
     <!-- Main DIV Ends -->
 </body>
 
-<script src="./js/index.js" type="text/javascript"></script>
-<script src="./js/modal.js" type="text/javascript"></script>
+<script src="./js/index.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
+<script src="./js/modal.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">

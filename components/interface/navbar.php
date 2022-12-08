@@ -1,5 +1,5 @@
 <!-- Navbar Starts Here -->
-<nav class="custom-nav navbar navbar-dark navbar-expand-lg bgnav-p">
+<nav class="custom-nav navbar navbar-dark navbar-expand-lg bgnav-p position-sticky top-0" style="z-index: 2;">
     <div class="container-fluid">
         <a class="navbar-brand nav-effect nav-p-link-color" href="./index.php">
             <div class="d-flex align-items-center justify-content-center gap-3">

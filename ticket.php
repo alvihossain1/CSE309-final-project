@@ -56,8 +56,11 @@
                                 <h1 class="">Get Tickets</h1>
                                 <div class="w-50 d-flex flex-column gap-3">
                                     <div class="same text-center">
-                                        <p>Show Name: <span style="color: goldenrod;" id="ticketShowname"></span></p>
-                                        <p>Show Time: </p>
+                                        <p>Show Name: <span style="color: goldenrod;" id="ticket-showName"></span></p>
+                                        <p>Show Date: <span style="color: goldenrod;" id="ticket-showDate"></span></p>
+                                        <p>Show Time: <span style="color: goldenrod;" id="ticket-showTime"></span></p>
+                                        <p>Ticket Price: <span style="color: goldenrod;" id="ticket-showTicketPrice"></span></p>
+                                        <p>Total Amount: <span style="color: deeppink;" id="ticket-totalAmount"></span></p>
                                     </div>
                                     <div class="same">
                                         <p>Select No. of Tickets</p>
@@ -70,12 +73,23 @@
                                         </div>
                                     </div>
                                     <div class="same">
-                                        <p>Select Payment Option</p>
-                                        <select class="w-100 p-2 bg-p-1 text-white" style="cursor: pointer;">
-                                            <option>Bank</option>
-                                            <option>Bkash</option>
-                                            <option>Nagad</option>
+                                        <p>Select Venue</p>
+                                        <select id="ticket-venueSelection" class="w-100 p-2 bg-p-1 text-white" style="cursor: pointer;">
+                                            <option value="Dhaka">Dhaka</option>
+                                            <option value="Sylhet">Sylhet</option>
+                                            <option value="Chittagong">Chittagong</option>
                                         </select>
+                                    </div>
+                                    <div class="same">
+                                        <p>Select Payment Option</p>
+                                        <select id="ticket-paymentMethod" class="w-100 p-2 bg-p-1 text-white" style="cursor: pointer;">
+                                            <option value="Bank">Bank</option>
+                                            <option value="Bkash">Bkash</option>
+                                            <option value="Nagad">Nagad</option>
+                                        </select>
+                                    </div>
+                                    <div class="same mt-3">
+                                        <p id="text-message">Select Tickets to Purchase</p>
                                     </div>
                                     <div class="same mt-3">
                                         <button id="confirm-tickets" class="mybutton w-100 button-p-sidebar-bg p-2">Confirm Tickets</button>
@@ -111,7 +125,8 @@
     </div>
 </body>
 
-<script src="./js/ticket.js" type="text/javascript"></script>
+<script src="./js/ticket.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
+<script src="./controller/js/insertUserShow.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

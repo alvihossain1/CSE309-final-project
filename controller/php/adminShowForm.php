@@ -8,12 +8,13 @@ if ($conn === false) {
 
 $showName = $_POST['showName'];
 $showGenre = $_POST['showGenre'];
-$showDateTime = $_POST['showDateTime'];
+$showDate = $_POST['showDate'];
+$showTime = $_POST['showTime'];
 $showUrl = $_POST['showUrl'];
 $showDescription = $_POST['showDescription'];
 $showVenue = $_POST['showVenue'];
 $showVenueDetails = $_POST['showVenueDetails'];
-$showTicektPrice = $_POST['showTicketPrice'];
+$showTicketPrice = $_POST['showTicketPrice'];
 $hallName = $_POST['hallName'];
 
 
@@ -22,8 +23,8 @@ $idStr = $strFirst.strVal(rand(0, 999999));
 $showID = intVal($idStr);
 
 
-$sql = "INSERT INTO shows_t(showID, showName, showDateTime, showGenre, showUrl, showDescription, showVenue, showVenueDetails, showTicketPrice, hallName) 
-                    VALUES('$showID', '$showName', '$showGenre', '$showDateTime', '$showUrl', '$showDescription', '$showVenue', '$showVenueDetails', '$showTicektPrice', '$hallName');";
+$sql = "INSERT INTO shows_t(showID, showName, showDate, showTime, showGenre, showUrl, showDescription, showVenue, showVenueDetails, showTicketPrice, hallName) 
+                    VALUES('$showID', '$showName', '$showDate', '$showTime', '$showGenre', '$showUrl', '$showDescription', '$showVenue', '$showVenueDetails', '$showTicketPrice', '$hallName');";
 
 
 $result = mysqli_query($conn, $sql);
@@ -46,6 +47,5 @@ $arrayList = array(
 
 echo json_encode($arrayList);
 
-mysqli_close($conn);
 
 ?>

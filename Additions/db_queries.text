@@ -23,8 +23,9 @@ CREATE TABLE shows_t(
     showID BIGINT,
     showName VARCHAR(50),
     showGenre VARCHAR(50),
-    showDateTime VARCHAR(30),    
-    showImageLink VARCHAR(300),
+    showDate VARCHAR(30),    
+    showTime VARCHAR(30),    
+    showUrl VARCHAR(300),
     showDescription VARCHAR(600),
     showVenue VARCHAR(50),
     showVenueDetails VARCHAR(50),
@@ -33,3 +34,18 @@ CREATE TABLE shows_t(
     CONSTRAINT show_pk PRIMARY KEY (showID)
 );
 ------------------------------------------
+
+SHOWS PURCHASES::
+CREATE TABLE `user_purchase_t` (
+  `purchaseID` bigint(20) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `showID` bigint(20) DEFAULT NULL,
+  `showName` varchar(50) DEFAULT NULL,
+  `showUrl` varchar(5000) DEFAULT NULL,
+  `showTicketPrice` int(11) DEFAULT NULL,
+  `showAmount` int(11) DEFAULT NULL,
+  `showDate` date DEFAULT NULL,
+  `showTime` varchar(20) DEFAULT NULL,
+  `venueSelection` varchar(50) DEFAULT NULL,
+  `paymentMethod` varchar(30) DEFAULT NULL
+);

@@ -14,10 +14,7 @@ for (let i = 0; i < detailsBtns.length; i++) {
         let element = detailsBtns[i]
         let showbox = element.parentElement.parentElement
 
-        let showImageLink = showbox.querySelector(".image").src
-        let showName = showbox.querySelector("p").innerHTML
-        console.log(showName)
-        console.log(showImageLink)
+       
 
         let sidebar = document.querySelector(".sidebar")
         
@@ -25,8 +22,13 @@ for (let i = 0; i < detailsBtns.length; i++) {
             sidebar.style.width = "0rem"
         }
         else{
-            sidebar.querySelector(".side-image").src = showImageLink
-            sidebar.querySelector(".showName").innerHTML = showName
+            sidebar.querySelector("#s-showUrl").src = showbox.querySelector(".h-showUrl").innerHTML
+            sidebar.querySelector("#s-showName").innerHTML = showbox.querySelector(".h-showName").innerHTML
+            sidebar.querySelector("#s-showGenre").innerHTML = showbox.querySelector(".h-showGenre").innerHTML
+            sidebar.querySelector("#s-showDate").innerHTML = showbox.querySelector(".h-showDate").innerHTML
+            sidebar.querySelector("#s-showTime").innerHTML = showbox.querySelector(".h-showTime").innerHTML
+            sidebar.querySelector("#s-showTicketPrice").innerHTML = showbox.querySelector(".h-showTicketPrice").innerHTML
+            sidebar.querySelector("#s-showDescription").innerHTML = showbox.querySelector(".h-showDescription").innerHTML
             sidebar.style.width = sidebarWidth
         }
     })

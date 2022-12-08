@@ -182,13 +182,13 @@
     background-color: goldenrod;
 }
 
-#goToPaymentBtn{
+.modal-go-btn{
     background-color: rgb(20, 117, 112);  
     color: white;
     transition: 0.4s ease; 
 }
 
-#goToPaymentBtn:hover{
+.modal-go-btn:hover{
     background-color: goldenrod;
 }
 

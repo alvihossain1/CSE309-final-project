@@ -97,7 +97,7 @@
 
 
         <!-- Login Template Starts Here -->
-        <div class="d-flex justify-content-center align-items-center min-vh-100" style="padding: 2rem 0;">
+        <div class="d-flex justify-content-center align-items-center min-vh-100" style="padding: 2rem 0">
             <form class="form-container" method="POST" action="">
                 <div class="form-box flex-column">
                     <div class="form-block full-width" style="text-align: center;">
@@ -195,7 +195,7 @@
 </body>
 
 
-<script src="./js/select.js" type="text/javascript"></script>
+<script src="./js/select.js?v=<?php include "./zconfig.php"?>" type="text/javascript"></script>
 
 <script>
     let citiesArr = ["Dhaka", "Chittagong", "Sylhet", "Rajshahi", "Khulna", "Cox's Bazar"]
