@@ -10,7 +10,7 @@
                 <!-- <div class="carousel-image" style="background-image: linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.25)), 
                             url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/horse-movies-1553108662.jpg);">
                 </div> -->
-                <video autoplay muted class="w-100 carousel-video">
+                <video autoplay muted loop class="w-100 carousel-video">
                     <source src="video03.mp4" type="video/mp4">
                 </video>
                 <div class="gradient position-absolute start-0 top-0 end-0 bottom-0"></div>
@@ -23,7 +23,7 @@
                 <!-- <div class="carousel-image" style="background-image: linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.25)), 
                             url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/horse-movies-1553108662.jpg);">
                 </div> -->
-                <video autoplay muted class="w-100 carousel-video">
+                <video autoplay muted loop class="w-100 carousel-video">
                     <source src="video01.mp4" type="video/mp4">
                 </video>
                 <div class="gradient position-absolute start-0 top-0 end-0 bottom-0"></div>
@@ -36,7 +36,7 @@
                 <!-- <div class="carousel-image" style="background-image: linear-gradient(to right, rgba(0,0,0,0.25), rgba(0,0,0,0.25)), 
                             url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/horse-movies-1553108662.jpg);">
                 </div> -->
-                <video autoplay muted class="w-100 carousel-video">
+                <video autoplay muted loop class="w-100 carousel-video">
                     <source src="video02.mp4" type="video/mp4">
                 </video>
                 <div class="gradient position-absolute start-0 top-0 end-0 bottom-0"></div>
