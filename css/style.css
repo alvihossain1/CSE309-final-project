@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Ubuntu', sans-serif;
-    /* background-color: #1e2633; */
+    /* background-color: #3A101C; */
 }
 
 /* .main{
@@ -367,6 +367,7 @@ form{
    }
   
   .container{
+    color: #BB9639;
     max-width: 850px;
     min-width: 250px;
     margin: auto;
