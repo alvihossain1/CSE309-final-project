@@ -60,8 +60,8 @@ mysqli_close($conn);
 require "./database.php";
 $res = "";
 if (isset($_POST['submit'])) {
-  $res = (new database)->sendmessage($_POST['name'], $_POST['email'], $_POST['message']);
-  // echo $res;
+    $res = (new database)->sendmessage($_POST['name'], $_POST['email'], $_POST['message']);
+    // echo $res;
 }
 
 
@@ -247,28 +247,30 @@ if (isset($_POST['submit'])) {
         </div>
         <!-- Modal ends -->
 
-        <article>
-            <div class="container">
-                <form action="index.php" method="post" autocomplete="off">
-                    <h3>If you have any queries</h3><br>
-                    <label for="name">Name</label>
-                    <input required type="text" id="name" name="name" placeholder="Your name" <?php if ($res) { ?> disabled <?php  } ?>>
+        <article class="py-5" style="background-color: rgb(0,0,0);">
+            <div class="section">
+                <div class="mycontainer my-0">
+                    <form action="index.php" method="post" autocomplete="off">
+                        <h3>If you have any queries</h3><br>
+                        <label for="name">Name</label>
+                        <input required type="text" id="name" name="name" placeholder="Your name" <?php if ($res) { ?> disabled <?php  } ?>>
 
-                    <label for="email">Email</label>
-                    <input required type="text" id="email" name="email" placeholder="Your email address" <?php if ($res) { ?> disabled <?php  } ?>>
+                        <label for="email">Email</label>
+                        <input required type="text" id="email" name="email" placeholder="Your email address" <?php if ($res) { ?> disabled <?php  } ?>>
 
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Write something.." style="height:100px" <?php if ($res) { ?> disabled <?php  } ?>></textarea>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Write something.." style="height:100px" <?php if ($res) { ?> disabled <?php  } ?>></textarea>
 
-                    <?php ?>
+                        <?php ?>
 
-                    <?php if (!$res) { ?>
-                        <input type="submit" value="Submit" name="submit">
-                    <?php } else { ?>
-                        <input type="reset" onclick="location.href='/index.php'" value="Submited Successfully! Send again?">
-                    <?php } ?>
+                        <?php if (!$res) { ?>
+                            <input type="submit" value="Submit" name="submit">
+                        <?php } else { ?>
+                            <input type="reset" onclick="location.href='/index.php'" value="Submited Successfully! Send again?">
+                        <?php } ?>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </article>
 

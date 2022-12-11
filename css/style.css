@@ -366,13 +366,13 @@ form{
     justify-content: center;
    }
   
-  .container{
+  .mycontainer{
     color: #BB9639;
     max-width: 850px;
     min-width: 250px;
     margin: auto;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
   }
   
   .error{

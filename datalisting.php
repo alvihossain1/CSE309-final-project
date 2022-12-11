@@ -42,7 +42,7 @@
 <?php include "./components/module/sessionHolder.php" ?>
 <?php 
 // PRIVATE ACCESS CHECK
-if(!isset($_SESSION['loggedInAdmin'])){
+if(!isset($_SESSION['loggedInUser'])){
     
 header('Location: adminLogin.php');
 }

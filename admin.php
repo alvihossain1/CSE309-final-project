@@ -38,7 +38,7 @@ session_start();
 <?php include "./components/module/connection.php" ?>
 <?php 
 // PRIVATE ACCESS CHECK
-if(!isset($_SESSION['loggedInAdmin'])){
+if(!isset($_SESSION['loggedInUser'])){
     
 header('Location: adminLogin.php');
 }

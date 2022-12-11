@@ -14,7 +14,7 @@ function ticketConfirm() {
             sessionStorage.clear()
 
             // COUNTS INTERVAL
-            let count = 7
+            let count = 5
             let interval = setInterval(() => {
                 $("#text-message").text(`${result.statusMessage}\nRedirecting to Hompage in ${count}s`)
                 console.log(count--)

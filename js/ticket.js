@@ -3,15 +3,6 @@ let number
 let totalAmount
 
 
-
-// ######
-const urlParams = new URLSearchParams(location.search);
-for (const [key, value] of urlParams) {
-    console.log(`${key}:${value}`);
-    document.getElementById("ticketShowname").innerHTML = value
-}
-
-
 document.getElementById("minus-button").addEventListener("click", () => {
     let midText = document.getElementById("mid-value")
     console.log(midText)
