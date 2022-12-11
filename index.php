@@ -15,8 +15,9 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
     <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" href="./css/style.css">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +56,13 @@ $result = mysqli_query($conn, $sql);
 
 
 mysqli_close($conn);
+
+require "./database.php";
+$res = "";
+if (isset($_POST['submit'])) {
+  $res = (new database)->sendmessage($_POST['name'], $_POST['email'], $_POST['message']);
+  // echo $res;
+}
 
 
 ?>
@@ -238,7 +246,30 @@ mysqli_close($conn);
         </div>
         <!-- Modal ends -->
 
+        <article>
+            <div class="container">
+                <form action="index.php" method="post" autocomplete="off">
+                    <h3>If you have any queries</h3><br>
+                    <label for="name">Name</label>
+                    <input required type="text" id="name" name="name" placeholder="Your name" <?php if ($res) { ?> disabled <?php  } ?>>
 
+                    <label for="email">Email</label>
+                    <input required type="text" id="email" name="email" placeholder="Your email address" <?php if ($res) { ?> disabled <?php  } ?>>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Write something.." style="height:100px" <?php if ($res) { ?> disabled <?php  } ?>></textarea>
+
+                    <?php ?>
+
+                    <?php if (!$res) { ?>
+                        <input type="submit" value="Submit" name="submit">
+                    <?php } else { ?>
+                        <input type="reset" onclick="location.href='/index.php'" value="Submited Successfully! Send again?">
+                    <?php } ?>
+
+                </form>
+            </div>
+        </article>
 
 
         <!-- FOOTER Starts Here -->
