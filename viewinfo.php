@@ -14,9 +14,9 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="stylesheet" type="text/css" href="./css/external.css">
-    <link rel="stylesheet" type="text/css" href="./css/form.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" type="text/css" href="./css/form.css?v=<?php include "./zconfig.php" ?>">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,13 +73,13 @@ mysqli_close($conn);
 
 
 <body>
-    <div class="main bg-p-1 position-relative">
+    <div class="main position-relative bg-p-4">
 
         <!-- Navbar Starts Here -->
         <?php include "./components/interface/navbar.php" ?>
         <!-- Navbar Ends Here -->
 
-        <div class="bg-p-5 min-vh-100">
+        <div class="min-vh-100">
             <div class="section">
                 <div class="small-section">
                     <div class="overflow-hidden text-white">

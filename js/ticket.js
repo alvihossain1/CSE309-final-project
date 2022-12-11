@@ -52,7 +52,6 @@ document.getElementById("plus-button").addEventListener("click", () => {
 $( document ).ready(function() {
     console.log( sessionStorage.getItem("showObject") )
     data = JSON.parse(sessionStorage.getItem("showObject"))
-
     
     $("#ticket-showName").text(data.showName)
     $("#ticket-showDate").text(data.showDate)
@@ -60,27 +59,17 @@ $( document ).ready(function() {
     $("#ticket-showTicketPrice").text(data.showTicketPrice)
     $("#ticket-totalAmount").text($("#ticket-showTicketPrice").text()) 
 
+});
+
+
+document.getElementById("confirm-tickets").addEventListener("click", () => {
     let totalAmount = parseInt($("#ticket-totalAmount").text())
-    let venueSelection = $("#ticket-paymentMethod").val()
-    let paymentMethod = $("#ticket-venueSelection").val()
+    let venueSelection = $("#ticket-venueSelection").val()
+    let paymentMethod = $("#ticket-paymentMethod").val()
 
     let data2 = {totalAmount, venueSelection, paymentMethod}
 
 
     sessionStorage.setItem("showSelection", JSON.stringify(data2))
-
-    // $.ajax({
-    //     type: "POST",
-    //     url: "controller/php/fetchUserShow.php",
-    //     data: data,
-    //     success: function (dataResult) {
-    //         let result = JSON.parse(dataResult)
-    //         console.log(result)
-    //     }
-    // })
-});
-
-
-document.getElementById("confirm-tickets").addEventListener("click", () => {
     ticketConfirm()
 })

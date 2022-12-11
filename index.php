@@ -111,6 +111,7 @@ mysqli_close($conn);
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
+                                    <li><a class="dropdown-item" href="./viewTickets.php">Puchased Tickets</a></li>
                                     <li>
                                         <form class="text-align-center" method="POST" action="">
                                             <button class="dropdown-item" name="logout-submit">Logout</button>

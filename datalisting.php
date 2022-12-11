@@ -40,6 +40,13 @@
 </head>
 
 <?php include "./components/module/sessionHolder.php" ?>
+<?php 
+// PRIVATE ACCESS CHECK
+if(!isset($_SESSION['loggedInAdmin'])){
+    
+header('Location: adminLogin.php');
+}
+?>
 
 <body>
     <div class="main bg-p-1 position-relative">

@@ -15,9 +15,9 @@
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
     <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="stylesheet" type="text/css" href="./css/external.css">    
-    <link rel="stylesheet" type="text/css" href="./css/form.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php" ?>">
+    <link rel="stylesheet" type="text/css" href="./css/form.css?v=<?php include "./zconfig.php" ?>">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +38,7 @@
 
 
 <?php include "./components/module/sessionHolder.php" ?>
+<?php include "./components/module/privateAccess.php" ?>
 
 
 <body>
@@ -99,8 +100,8 @@
                         </div>  
                         <div class="col-md-6 p-0">
                             <div class="overflow-hidden p-1 image-hover position-relative">
-                                <div class="position-absolute start-0 end-0 bottom-0 top-0" style="background-color: rgba(255, 255, 255, 0.1); z-index: 1;"></div>
-                                <img class="small-image grid-image" src="https://c8.alamy.com/comp/2BG784X/retro-party-cinema-invitation-vector-tickets-set-vector-golden-tickets-isolated-on-black-background-illustration-2BG784X.jpg"  style="height: 60vh;">
+                                <div class="position-absolute start-0 end-0 bottom-0 top-0" style="background-color: rgba(200, 200, 200, 0.15); z-index: 1;"></div>
+                                <img class="small-image grid-image" src="./image/ticket.jpg"  style="height: 100%;">
                             </div>
                         </div>                                                                     
                     </div>

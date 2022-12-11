@@ -26,7 +26,7 @@ $result = mysqli_query($conn, $sql);
    
 if($result){
     $statusCode = "success";
-    $statusMessage = "Congratulations, You've successfully purchased the ticket.";        
+    $statusMessage = "Congratulations, Tickets Purchased.";        
 }
 else{
     $statusCode = "error";

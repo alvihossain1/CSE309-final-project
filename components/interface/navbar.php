@@ -16,7 +16,7 @@
                     <a class="nav-effect nav-p-link-color nav-link myactive" aria-current="page" href="./index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-effect show-nav nav-p-link-color nav-link" href="#wholeShow">Shows</a>
+                    <a class="nav-effect show-nav nav-p-link-color nav-link" href="./index.php#wholeShow">Shows</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-effect nav-p-link-color nav-link" href="./aboutUs.php">About Us</a>
@@ -47,6 +47,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./viewinfo.php">View Information</a></li>
+                            <li><a class="dropdown-item" href="./viewTickets.php">Puchased Tickets</a></li>
                             <li>
                                 <form class="text-align-center" method="POST" action="">
                                     <button class="dropdown-item" name="logout-submit">Logout</button>
