@@ -67,15 +67,15 @@ $text = "";
 
 $sql = "SELECT * FROM shows_t";
 $result_shows = mysqli_query($conn, $sql);
-$total_shows = mysqli_num_rows($result_shows);
 
 $sql = "SELECT * FROM user_t";
 $result_user = mysqli_query($conn, $sql);
-$total_users = mysqli_num_rows($result_user);
 
 $sql = "SELECT * FROM user_purchase_t";
 $result_purchased = mysqli_query($conn, $sql);
-$total_purchased = mysqli_num_rows($result_purchased);
+
+$sql = "SELECT name, email, comments, submission_date FROM submission ORDER BY submission_date";
+$result_queries = mysqli_query($conn, $sql);
 
 
 
@@ -102,133 +102,21 @@ mysqli_close($conn);
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Show Name Listing</button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Users Table Listing</button>
                             <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Purchased Tickts Listing</button>
+                            <button class="nav-link" id="nav-queries-tab" data-bs-toggle="tab" data-bs-target="#nav-queries" type="button" role="tab" aria-controls="nav-queries" aria-selected="false">Queries Submission</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <div class="table-holder text-white">
-                                <h3>Shows Table</h3>
-                                <div class="table-here overflow-auto p-0 m-0">
-                                    <table class="table table-hover table-dark">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Show ID</th>
-                                                <th scope="col">Show Name</th>
-                                                <th scope="col">Show Genre</th>
-                                                <th scope="col">Show Date</th>
-                                                <th scope="col">Show Time</th>
-                                                <th scope="col">Show Venue</th>
-                                                <th scope="col">Show Ticket Price</th>
-                                                <th scope="col">Hall Name</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <?php $index = 1 ?>
-                                            <?php foreach ($result_shows as $show) { ?>
-                                                <tr>
-                                                    <th scope="row"><?php echo $index++ ?></th>
-                                                    <td><?php echo $show['showID'] ?></td>
-                                                    <td><?php echo $show['showName'] ?></td>
-                                                    <td><?php echo $show['showGenre'] ?></td>
-                                                    <td><?php echo $show['showDate'] ?></td>
-                                                    <td><?php echo $show['showTime'] ?></td>
-                                                    <td><?php echo $show['showVenue'] ?></td>
-                                                    <td><?php echo $show['showTicketPrice'] ?></td>
-                                                    <td><?php echo $show['hallName'] ?></td>
-                                                </tr>
-                                            <?php } ?>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
+                            <?php include "./components/interface/admin/nav-tabs/showsTable.php" ?>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <div class="table-holder text-white">
-                                <h3>Users Table</h3>
-                                <div class="table-here overflow-auto p-0 m-0">
-                                    <table class="table table-hover table-dark">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First Name</th>
-                                                <th scope="col">Last Name</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Address</th>
-                                                <th scope="col">City</th>
-                                                <th scope="col">Zip</th>
-                                                <th scope="col">Gender</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $index = 1 ?>
-                                            <?php foreach ($result_user as $user) { ?>
-                                                <tr>
-                                                    <th scope="row"><?php echo $index++ ?></th>
-                                                    <td><?php echo $user['fname'] ?></td>
-                                                    <td><?php echo $user['lname'] ?></td>
-                                                    <td><?php echo $user['email'] ?></td>
-                                                    <td><?php echo $user['addr'] ?></td>
-                                                    <td><?php echo $user['city'] ?></td>
-                                                    <td><?php echo $user['zip'] ?></td>
-                                                    <td><?php echo $user['gender'] ?></td>
-                                                </tr>
-                                            <?php } ?>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
+                            <?php include "./components/interface/admin/nav-tabs/UsersTable.php" ?>
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
-                            <div class="table-holder text-white">
-                                <h3>Purchased Shows</h3>
-                                <div class="table-here overflow-auto p-0 m-0">
-                                    <table class="table table-hover table-dark">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Purchase ID</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Show ID</th>
-                                                <th scope="col">Show Name</th>
-                                                <th scope="col">Ticket Price</th>
-                                                <th scope="col">Total Amount</th>
-                                                <th scope="col">Venue Selection</th>
-                                                <th scope="col">Payment Method</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $index = 1 ?>
-                                            <?php foreach ($result_purchased as $user) { ?>
-                                                <tr>
-                                                    <th scope="row"><?php echo $index++ ?></th>
-                                                    <td><?php echo $user['purchaseID'] ?></td>
-                                                    <td><?php echo $user['email'] ?></td>
-                                                    <td><?php echo $user['showID'] ?></td>
-                                                    <td><?php echo $user['showName'] ?></td>
-                                                    <td><?php echo $user['showTicketPrice'] ?></td>
-                                                    <td><?php echo $user['showAmount'] ?></td>
-                                                    <td><?php echo $user['venueSelection'] ?></td>
-                                                    <td><?php echo $user['paymentMethod'] ?></td>
-                                                </tr>
-                                            <?php } ?>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
+                            <?php include "./components/interface/admin/nav-tabs/purchasedTicketsTable.php" ?>
+                        </div>
+                        <div class="tab-pane fade" id="nav-queries" role="tabpanel" aria-labelledby="nav-contact-tab">
+                            <?php include "./components/interface/admin/nav-tabs/queriesTable.php" ?>
                         </div>
                     </div>
                 </div>
@@ -247,11 +135,6 @@ mysqli_close($conn);
         <!-- FOOTER Starts Here -->
         <?php include './components/interface/footer.php' ?>
         <!-- FOOTER Ends -->
-
-
-
-
-
 
     </div>
 </body>
