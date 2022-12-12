@@ -3,7 +3,7 @@ class database {
   private $hostName = "localhost";
   private $userName = "root";
   private $password = "";
-  private $dbName = "form_db";
+  private $dbName = "theatre_db";
 
   public function sendMessage($name = "", $email = "", $message = "") {
     $result =  "Error";
