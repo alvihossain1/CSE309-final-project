@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2022 at 09:43 PM
+-- Generation Time: Dec 12, 2022 at 09:50 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `theatre_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_user`
+--
+
+CREATE TABLE `admin_user` (
+  `email` varchar(50) NOT NULL,
+  `pass` varchar(50) DEFAULT NULL,
+  `fname` varchar(50) DEFAULT NULL,
+  `lname` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_user`
+--
+
+INSERT INTO `admin_user` (`email`, `pass`, `fname`, `lname`) VALUES
+('admin@yahoo.com', 'admin', 'JC', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -53,6 +73,27 @@ INSERT INTO `shows_t` (`showID`, `showName`, `showGenre`, `showDate`, `showTime`
 (55755212, 'Titanic Act Show', 'Act', '2022-12-12', '16:30', 'https://www.subplotstudio.com/wp-content/themes/x-child/images/popular-titanic.jpg', 'Seventeen-year-old Rose hails from an aristocratic family and is set to be married. When she boards the Titanic, she meets Jack Dawson, an artist, and falls in love with him.', 'Dhaka', 'PanthaPath', 350, 'Hall - 4'),
 (55769085, 'AIDA Show', 'Act', '2022-12-12', '16:30', 'https://www.subplotstudio.com/resources/images/productions/193/7974/art.overview.437.jpg', 'Any movie lover knows how much the text on a Netflix blurb matters when trying to choose something new to watch. A podcast description works in a similar way - it gives potential listeners a peek at what to expect from your podcast before tuning in. ', 'Dhaka', 'PanthaPath', 300, 'Hall - 2'),
 (55852232, 'The Talent Show', 'Comedy', '2022-12-12', '16:30', 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/talent-show-flyer-design-template-0028b94014f5cee6adca046438bc5a5e_screen.jpg?ts=1636991394', 'A case of mistaken identity forces a bumbling entrepreneur to team up with a notorious assassin in hopes of staying alive.', 'Dhaka', 'PanthaPath', 400, 'Hall - 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submission`
+--
+
+CREATE TABLE `submission` (
+  `sub_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `comments` varchar(260) DEFAULT NULL,
+  `submission_date` date DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `submission`
+--
+
+INSERT INTO `submission` (`sub_id`, `name`, `email`, `comments`, `submission_date`) VALUES
+(1, 'newaz', 'newaz@gmail.com', 'DAMN SICK CODE FEVER', '2022-09-05');
 
 -- --------------------------------------------------------
 
@@ -103,10 +144,22 @@ INSERT INTO `user_t` (`fname`, `lname`, `addr`, `city`, `zip`, `gender`, `email`
 --
 
 --
+-- Indexes for table `admin_user`
+--
+ALTER TABLE `admin_user`
+  ADD PRIMARY KEY (`email`);
+
+--
 -- Indexes for table `shows_t`
 --
 ALTER TABLE `shows_t`
   ADD PRIMARY KEY (`showID`);
+
+--
+-- Indexes for table `submission`
+--
+ALTER TABLE `submission`
+  ADD PRIMARY KEY (`sub_id`);
 
 --
 -- Indexes for table `user_purchase_t`
@@ -125,6 +178,12 @@ ALTER TABLE `user_t`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `submission`
+--
+ALTER TABLE `submission`
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_purchase_t`
