@@ -375,6 +375,9 @@ form{
     font-size: small;
   }
 
+  .nav .nav-link {
+      color: white;
+  }
 /**/
 
 /* About Us */
