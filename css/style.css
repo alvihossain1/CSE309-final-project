@@ -360,12 +360,7 @@ form{
     background-color: #2b2e3691;
   }
   
-  h3, h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   }
-  
+
   .mycontainer{
     color: #BB9639;
     max-width: 850px;

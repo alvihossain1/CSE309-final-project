@@ -17,7 +17,7 @@ session_start();
     <!-- My CSS -->
     <link rel="stylesheet" type="text/css" href="./css/external.css?v=<?php include "./zconfig.php" ?>">
     <link rel="stylesheet" type="text/css" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?v=<?php include "./zconfig.php" ?>">
 
     <!-- Google Fonts Start -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -247,7 +247,7 @@ if (isset($_POST['submit'])) {
         </div>
         <!-- Modal ends -->
 
-        <article class="py-5" style="background-color: rgb(0,0,0);">
+        <article class="py-5 bg-p-6">
             <div class="section">
                 <div class="mycontainer my-0">
                     <form action="index.php" method="post" autocomplete="off">

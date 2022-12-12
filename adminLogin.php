@@ -37,7 +37,47 @@
 
 </head>
 
-<?php include "./components/module/sessionHolder.php" ?>
+
+
+<?php 
+    
+
+    $conn = mysqli_connect("localhost", "root", "", "theatre_db");
+
+    if ($conn === false) {
+        die("ERROR: Could not connect" . mysqli_connect_error());
+    }
+
+    $text = "";
+
+    if(isset($_POST['submit'])){
+
+        $emailInput = $_POST['email'];
+        $passInput = $_POST['password'];
+
+        $sql = "SELECT email, pass, fname, lname FROM admin_user WHERE email = '$emailInput' and pass = '$passInput'";
+        $result = mysqli_query($conn, $sql);
+
+        foreach($result as $user){
+            if($user['email'] === $emailInput && $user['pass'] === $passInput){
+                $_SESSION["loggedInUser"] = $user['fname']." ".$user['lname'];
+                $_SESSION["userEmail"] = $user['email'];
+                $_SESSION["loggedInAdminEmail"] = $user['email'];
+                header('Location: admin.php');
+            } 
+        }
+        if(mysqli_num_rows($result) === 0){
+            $text = "Email or Pass doesn't match";
+            $textColor = "text-danger";
+        }
+
+    }
+
+    mysqli_close($conn);
+
+    
+?>
+
 
 <body>
     <div class="main position-relative min-vh-100 admin-background">
@@ -46,6 +86,12 @@
         <?php include "./components/interface/navbar.php" ?>
         <!-- Navbar Ends Here -->
 
+        <div class="position-absolute bg-dark text-white p-2 border border-2 text-center" style="top: 12%; right: 2%;">
+            <h1>For Convenience</h1>
+            <p>Admin Email: <span class="text-info">admin@yahoo.com</span></p>
+            <p>Admin password: <span class="text-info">admin</span></p>
+            <p>Admin Name: <span class="text-info">JC Admin</span></p>
+        </div>
 
         <!-- Login Template Starts Here -->
         <div class="d-flex justify-content-center align-items-center min-vh-100">
@@ -64,9 +110,11 @@
                     </div>
                     
                     <!-- display message below -->
-                    <div class="form-block full-width d-none">
-                        <p class="p-0 m-0"></p>
-                    </div>
+                    <div style="display: <?php if($text === ""){echo "none;";}else{echo "flex;";} ?>">
+                            <div class="form-block full-width <?php echo $textColor; ?>">
+                                <p> <?php echo $text ?> </p>
+                            </div>
+                        </div>
     
                     <div class="form-block full-width">
                         <button class="form-button" type="submit" name="submit">Login</button>

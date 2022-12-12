@@ -7,10 +7,13 @@
     --bg-p-3: #895061;
     --bg-p-4: #1f424b;
     --bg-p-5: #1f1f1f;
+    --bg-p-6: #161616;
     --bg-p-button: #284951;
     --bg-p-button-hover: #721c36;
     --font-p: rgb(226, 226, 226);
     --bg-p-showbox: black;
+    --bg-footer: rgb(68, 19, 33);
+    --bg-footer-bottom: rgb(37, 10, 18);
 }
 
 .bg-p-1{
@@ -31,6 +34,10 @@
 
 .bg-p-5{
     background-color: var(--bg-p-5);
+}
+
+.bg-p-6{
+    background-color: var(--bg-p-6);
 }
 
 .logo-span{
@@ -198,11 +205,11 @@
 }
 
 .bg-footer{
-    background-color: rgb(68, 19, 33);
+    background-color: var(--bg-footer);
 }
 
 .bg-footer-bottom{
-    background-color: rgb(37, 10, 18);
+    background-color: var(--bg-footer-bottom);
 }
 
 .myfooter-links{

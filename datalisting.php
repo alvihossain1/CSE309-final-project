@@ -39,20 +39,30 @@
 
 </head>
 
-<?php include "./components/module/sessionHolder.php" ?>
 <?php 
-// PRIVATE ACCESS CHECK
-if(!isset($_SESSION['loggedInUser'])){
+if(!isset($_SESSION['loggedInUser']) && !isset($_SESSION['loggedInAdmin'])){
     
 header('Location: adminLogin.php');
 }
+
+// SESSION LOGOUT
+if(isset($_POST['logout-submit'])){
+    if(isset($_SESSION['loggedInUser']) || isset($_SESSION['userEmail']) || isset($_SESSION['loggedInAdminEmail'])){
+        unset($_SESSION['loggedInUser']);
+        unset($_SESSION['userEmail']);
+        unset($_SESSION['loggedInAdminEmail']);
+        header('Location: adminLogin.php');
+    }
+}
+
+
 ?>
 
 <body>
     <div class="main bg-p-1 position-relative">
 
         <!-- Navbar Starts Here -->
-        <?php include "./components/interface/navbar.php" ?>
+        <?php include "./components/interface/admin/adminNavbar.php" ?>
         <!-- Navbar Ends Here -->
 
         <div class="bg-p-5 min-vh-100 admin-background">
