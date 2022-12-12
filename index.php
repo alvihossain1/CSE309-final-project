@@ -266,7 +266,7 @@ if (isset($_POST['submit'])) {
                         <?php if (!$res) { ?>
                             <input type="submit" value="Submit" name="submit">
                         <?php } else { ?>
-                            <input type="reset" onclick="location.href='/index.php'" value="Submited! Send again?">
+                            <input type="reset" onclick="location.href='./index.php'" value="Submited! Send again?">
                         <?php } ?>
 
                     </form>
