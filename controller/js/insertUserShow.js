@@ -11,6 +11,7 @@ function ticketConfirm() {
             let result = JSON.parse(dataResult)
             console.log(dataResult)
             $("#text-message").text(result.statusMessage)
+            document.querySelector("#confirm-tickets").disabled = true;
             sessionStorage.clear()
 
             // COUNTS INTERVAL
@@ -20,6 +21,7 @@ function ticketConfirm() {
                 console.log(count--)
                 if (count === -1) {
                     clearInterval(interval)
+                    document.querySelector("#confirm-tickets").disabled = false;
                     location.href = "./index.php"
                 }
             }, 1000)
