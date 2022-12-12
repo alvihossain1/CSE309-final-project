@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 01:43 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 12, 2022 at 02:15 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,6 +53,20 @@ INSERT INTO `shows_t` (`showID`, `showName`, `showGenre`, `showDate`, `showTime`
 (55755212, 'Titanic Act Show', 'Act', '2022-12-12', '16:30', 'https://www.subplotstudio.com/wp-content/themes/x-child/images/popular-titanic.jpg', 'Seventeen-year-old Rose hails from an aristocratic family and is set to be married. When she boards the Titanic, she meets Jack Dawson, an artist, and falls in love with him.', 'Dhaka', 'PanthaPath', 350, 'Hall - 4'),
 (55769085, 'AIDA Show', 'Act', '2022-12-12', '16:30', 'https://www.subplotstudio.com/resources/images/productions/193/7974/art.overview.437.jpg', 'Any movie lover knows how much the text on a Netflix blurb matters when trying to choose something new to watch. A podcast description works in a similar way - it gives potential listeners a peek at what to expect from your podcast before tuning in. ', 'Dhaka', 'PanthaPath', 300, 'Hall - 2'),
 (55852232, 'The Talent Show', 'Comedy', '2022-12-12', '16:30', 'https://d1csarkz8obe9u.cloudfront.net/posterpreviews/talent-show-flyer-design-template-0028b94014f5cee6adca046438bc5a5e_screen.jpg?ts=1636991394', 'A case of mistaken identity forces a bumbling entrepreneur to team up with a notorious assassin in hopes of staying alive.', 'Dhaka', 'PanthaPath', 400, 'Hall - 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submission`
+--
+
+CREATE TABLE `submission` (
+  `sub_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `comments` varchar(260) DEFAULT NULL,
+  `submission_date` date DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -117,6 +131,12 @@ ALTER TABLE `shows_t`
   ADD PRIMARY KEY (`showID`);
 
 --
+-- Indexes for table `submission`
+--
+ALTER TABLE `submission`
+  ADD PRIMARY KEY (`sub_id`);
+
+--
 -- Indexes for table `user_purchase_t`
 --
 ALTER TABLE `user_purchase_t`
@@ -133,6 +153,12 @@ ALTER TABLE `user_t`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `submission`
+--
+ALTER TABLE `submission`
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_purchase_t`
