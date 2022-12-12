@@ -70,6 +70,7 @@ mysqli_close($conn);
 ?>
 
 <?php include "./components/module/sessionHolder.php" ?>
+<?php include "./components/module/privateAccess.php" ?>
 
 
 <body>

@@ -1,4 +1,4 @@
-<div class="min-vh-100 bg-p-4 pt-3 pb-5">
+<div class="min-vh-100 bg-p-4" style="padding: 2rem 0 5rem 0;">
     <div class="section">
         <div class="small-section">
             <div class="heading-text heading-p-text my-3">

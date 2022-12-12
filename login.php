@@ -115,6 +115,10 @@
                                 <p> <?php echo $text ?> </p>
                             </div>
                         </div>
+
+                    <div class="form-block full-width">
+                        <span style="font-size: 0.8rem; cursor: pointer;" class="text-white"><p class="d-inline">Don't have an account?</p><a class="nav-effect pl-1 m-0" href="./signup.php">Sign Up Here</a></span>
+                    </div>
     
                     <div class="form-block full-width">
                         <button class="form-button" type="submit" name="submit">Login</button>
