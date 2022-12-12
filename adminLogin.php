@@ -41,6 +41,9 @@
 
 <?php 
     
+    unset($_SESSION['loggedInUser']);
+    unset($_SESSION['userEmail']);
+
 
     $conn = mysqli_connect("localhost", "root", "", "theatre_db");
 

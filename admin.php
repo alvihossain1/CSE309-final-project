@@ -37,7 +37,7 @@ session_start();
 <?php include "./components/module/connection.php" ?>
 
 <?php 
-if(!isset($_SESSION['loggedInUser']) && !isset($_SESSION['loggedInAdmin'])){
+if(!isset($_SESSION['loggedInUser']) || !isset($_SESSION['loggedInAdminEmail'])){
     
 header('Location: adminLogin.php');
 }

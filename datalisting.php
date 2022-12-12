@@ -36,7 +36,7 @@ session_start();
 </head>
 
 <?php
-if (!isset($_SESSION['loggedInUser']) && !isset($_SESSION['loggedInAdmin'])) {
+if (!isset($_SESSION['loggedInUser']) || !isset($_SESSION['loggedInAdminEmail'])) {
 
     header('Location: adminLogin.php');
 }
